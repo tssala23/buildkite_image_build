@@ -1,6 +1,6 @@
 steps:
   - label: "Build Docker Image with Kaniko"
-    image: gcr.io/kaniko-project/executor:latest  # Use Kaniko executor image
+    # image: gcr.io/kaniko-project/executor:latest  # Use Kaniko executor image
     env:
       DOCKER_CONFIG: /kaniko/.docker  # Set the Docker config path for Kaniko
     command:

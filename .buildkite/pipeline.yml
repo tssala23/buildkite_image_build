@@ -1,0 +1,14 @@
+steps:
+  - label: "Build Docker Image with Kaniko"
+    plugins:
+      - docker#v3.4.0:
+          image: gcr.io/kaniko-project/executor:latest
+          always-pull: true
+          environment:
+            DOCKER_CONFIG: /kaniko/.docker  # Path to Docker config
+          volumes:
+            - /kaniko:/kaniko  # Mount volume for Kaniko
+    commands:
+      - mkdir -p /kaniko/.docker  # Create directory for Docker config
+      - echo "{\"auths\":{\"${QUAY_REGISTRY}\":{\"username\":\"${QUAY_USERNAME}\",\"password\":\"${QUAY_PASSWORD}\"}}}" > /kaniko/.docker/config.json
+      - /kaniko/executor --dockerfile=Dockerfile --context=dir://. --destination=${QUAY_REGISTRY}/tsalawu0/buildkite_test:1.0

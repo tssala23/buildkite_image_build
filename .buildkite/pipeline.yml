@@ -1,11 +1,11 @@
 steps:
   - label: "Build Docker Image with Kaniko"
+    image: gcr.io/kaniko-project/executor:latest  # Use Kaniko executor image
+    env:
+      DOCKER_CONFIG: /kaniko/.docker  # Set the Docker config path for Kaniko
     command:
       - mkdir -p /kaniko/.docker  # Create directory for Docker config
       - echo "{\"auths\":{\"${QUAY_REGISTRY}\":{\"username\":\"${QUAY_USERNAME}\",\"password\":\"${QUAY_PASSWORD}\"}}}" > /kaniko/.docker/config.json
       - /kaniko/executor --dockerfile=Dockerfile --context=dir://. --destination=${QUAY_REGISTRY}/tsalawu0/buildkite-test:1.0
-    env:
-      DOCKER_CONFIG: /kaniko/.docker  # Set the Docker config path for Kaniko
-    image: gcr.io/kaniko-project/executor:latest  # Use Kaniko executor image
     artifacts:
       - /kaniko/.docker/config.json  # Optionally store the config for debugging

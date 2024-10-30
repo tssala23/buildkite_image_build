@@ -10,5 +10,5 @@ steps:
     artifacts:
       - /workspace/.docker/config.json  # Optionally store the config for debugging
     plugins:
-      - kaniko:
+      - docker#v3.6.0:
           image: gcr.io/kaniko-project/executor:latest  # Use Kaniko executor image

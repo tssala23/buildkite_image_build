@@ -9,4 +9,6 @@ steps:
       - /kaniko/executor --dockerfile=Dockerfile --context=dir://. --destination=${QUAY_REGISTRY}/tsalawu0/buildkite-test:1.0
     artifacts:
       - /workspace/.docker/config.json  # Optionally store the config for debugging
-    image: gcr.io/kaniko-project/executor:latest  # Use Kaniko executor image
+    plugins:
+      - kaniko:
+          image: gcr.io/kaniko-project/executor:latest  # Use Kaniko executor image

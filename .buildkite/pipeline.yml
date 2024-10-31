@@ -10,6 +10,5 @@ steps:
     artifacts:
       - /workspace/.docker/config.json  # Optionally store the config for debugging
     plugins:
-      - "github.com/buildkite-plugins/kubernetes-buildkite-plugin#v2.8.0":
-          url: "https://${GITHUB_USERNAME}:${GITHUB_PAT}@github.com/buildkite-plugins/kubernetes-buildkite-plugin.git"
+      - "https://${GITHUB_USERNAME}:${GITHUB_PAT}@github.com/buildkite-plugins/kubernetes-buildkite-plugin.git":
           image: gcr.io/kaniko-project/executor:latest  # Use Kaniko executor image

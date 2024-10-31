@@ -1,9 +1,20 @@
 steps:
-  - label: "Consulting my :crystal_ball: thats inside my :k8s: pod"
+  - label: "Build Docker Image with Kaniko"
+    env:
+      DOCKER_CONFIG: /workspace/.docker  # Set the Docker config path for Kaniko
+      PATH: $PATH:/usr/local/bin
+    artifacts:
+      - /workspace/.docker/config.json  # Optionally store the config for debugging
     plugins:
-      - k8s-job:
+      - "k8s-job":
           pod-spec:
             containers:
-              - name: test
-                image: busybox:1.28
-                command: ['sh', '-c', 'echo "Hello, Kubernetes!" && sleep 30']
+              - name: test-con
+                image: quay.io/tsalawu0/kaniko-kubectl:1.0  # Use Kaniko executor image
+                command:
+                  - /bin/sh
+                  - -c
+                  - |
+                    mkdir -p /workspace/.docker  # Create directory for Docker config
+                    echo "{\"auths\":{\"${QUAY_REGISTRY}\":{\"username\":\"${QUAY_USERNAME}\",\"password\":\"${QUAY_PASSWORD}\"}}}" > /workspace/.docker/config.json
+                    /kaniko/executor --dockerfile=Dockerfile --context=dir://. --destination=${QUAY_REGISTRY}/tsalawu0/buildkite-test:1.0

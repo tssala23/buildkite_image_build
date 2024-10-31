@@ -16,6 +16,9 @@ steps:
               - name: test-con
                 image: quay.io/tsalawu0/kaniko-kubectl:1.0  # Use Kaniko executor image
                 command:
-                  - mkdir -p /workspace/.docker  # Create directory for Docker config
-                  - echo "{\"auths\":{\"${QUAY_REGISTRY}\":{\"username\":\"${QUAY_USERNAME}\",\"password\":\"${QUAY_PASSWORD}\"}}}" > /workspace/.docker/config.json
-                  - /kaniko/executor --dockerfile=Dockerfile --context=dir://. --destination=${QUAY_REGISTRY}/tsalawu0/buildkite-test:1.0
+                  - /bin/sh
+                  - -c
+                  - |
+                    mkdir -p /workspace/.docker  # Create directory for Docker config
+                    echo "{\"auths\":{\"${QUAY_REGISTRY}\":{\"username\":\"${QUAY_USERNAME}\",\"password\":\"${QUAY_PASSWORD}\"}}}" > /workspace/.docker/config.json
+                    /kaniko/executor --dockerfile=Dockerfile --context=dir://. --destination=${QUAY_REGISTRY}/tsalawu0/buildkite-test:1.0

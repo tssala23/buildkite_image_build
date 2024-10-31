@@ -1,0 +1,9 @@
+steps:
+  - label: "Consulting my :crystal_ball: thats inside my :k8s: pod"
+    plugins:
+      - k8s-job:
+          pod-spec:
+            containers:
+              - name: test
+                image: busybox:1.28
+                command: ['sh', '-c', 'echo "Hello, Kubernetes!" && sleep 30']

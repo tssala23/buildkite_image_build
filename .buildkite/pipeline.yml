@@ -11,4 +11,11 @@ steps:
       - /workspace/.docker/config.json  # Optionally store the config for debugging
     plugins:
       - "k8s-job":
-          image: gcr.io/kaniko-project/executor:latest  # Use Kaniko executor image
+          pod-spec:
+            containers:
+              - name: test-con
+                image: gcr.io/kaniko-project/executor:latest  # Use Kaniko executor image
+                command:
+                  - mkdir -p /workspace/.docker  # Create directory for Docker config
+                  - echo "{\"auths\":{\"${QUAY_REGISTRY}\":{\"username\":\"${QUAY_USERNAME}\",\"password\":\"${QUAY_PASSWORD}\"}}}" > /workspace/.docker/config.json
+                  - /kaniko/executor --dockerfile=Dockerfile --context=dir://. --destination=${QUAY_REGISTRY}/tsalawu0/buildkite-test:1.0

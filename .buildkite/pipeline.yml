@@ -10,5 +10,5 @@ steps:
     artifacts:
       - /workspace/.docker/config.json  # Optionally store the config for debugging
     plugins:
-      - "k8s-job#v1.0.0":
+      - "k8s-job":
           image: gcr.io/kaniko-project/executor:latest  # Use Kaniko executor image

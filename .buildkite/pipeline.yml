@@ -2,9 +2,9 @@ steps:
   # Step 1: Trigger the OpenShift build
   - label: "Trigger OpenShift Build"
     commands:
-      - PATH=$PATH:/workspace/build/buildkite/test-org-68/image-build-test/bin
+      - PATH=$PATH:/workspace/build/buildkite/test-org-68/image-build-test/bin #this can also be set in the pipeline setting on buildkite
       - cd /workspace/build/buildkite/test-org-68/image-build-test/bin
       - curl -L -o openshift-client-linux.tar.gz https://mirror.openshift.com/pub/openshift-v4/clients/ocp/stable/openshift-client-linux.tar.gz
       - tar -xvf openshift-client-linux.tar.gz
-      - oc whoami
-      - sleep 6000
+      - BUILD_NAME=$(oc start-build vllm-main-buildconfig-2 --output=name)
+      - oc wait --for=condition=complete $BUILD_NAME --timeout=120m

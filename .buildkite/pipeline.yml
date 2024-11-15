@@ -3,4 +3,4 @@ steps:
   - label: "Trigger OpenShift Build"
     commands:
       - echo "PATH is: $PATH"
-      - ls -l /usr/local/bin/oc
+      - ls -l /usr/local/bin

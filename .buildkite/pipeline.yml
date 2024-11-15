@@ -3,4 +3,4 @@ steps:
   - label: "Trigger OpenShift Build"
     commands:
       # - echo "PATH is: $PATH"
-      - oc get pods
+      - sleep 6000

@@ -2,5 +2,9 @@ steps:
   # Step 1: Trigger the OpenShift build
   - label: "Trigger OpenShift Build"
     commands:
-      # - echo "PATH is: $PATH"
+      - PATH=$PATH:/workspace/build/buildkite/test-org-68/image-build-test/bin
+      - cd /workspace/build/buildkite/test-org-68/image-build-test/bin
+      - curl -L -o openshift-client-linux.tar.gz https://mirror.openshift.com/pub/openshift-v4/clients/ocp/stable/openshift-client-linux.tar.gz
+      - tar -xvf openshift-client-linux.tar.gz
+      - oc whoami
       - sleep 6000

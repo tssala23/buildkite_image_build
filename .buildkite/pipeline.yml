@@ -1,20 +1,16 @@
 steps:
-  - label: "Build Docker Image with Kaniko"
-    env:
-      DOCKER_CONFIG: /workspace/.docker  # Set the Docker config path for Kaniko
-      PATH: $PATH:/usr/local/bin
-    artifacts:
-      - /workspace/.docker/config.json  # Optionally store the config for debugging
-    plugins:
-      - "k8s-job":
-          pod-spec:
-            containers:
-              - name: test-con
-                image: quay.io/tsalawu0/kaniko-kubectl:1.0  # Use Kaniko executor image
-                command:
-                  - /bin/sh
-                  - -c
-                  - |
-                    mkdir -p /workspace/.docker  # Create directory for Docker config
-                    echo "{\"auths\":{\"${QUAY_REGISTRY}\":{\"username\":\"${QUAY_USERNAME}\",\"password\":\"${QUAY_PASSWORD}\"}}}" > /workspace/.docker/config.json
-                    /kaniko/executor --dockerfile=Dockerfile --context=dir://. --destination=${QUAY_REGISTRY}/tsalawu0/buildkite-test:1.0
+  # Step 1: Trigger the OpenShift build
+  - label: "Trigger OpenShift Build"
+    commands:
+      - echo "Triggering OpenShift build"
+      - |
+        # Start the build using oc start-build
+        oc start-build vllm-main-buildconfig-2 --wait
+
+  # Step 2: Wait for the OpenShift build to complete
+  - label: "Wait for Build to Finish"
+    commands:
+      - echo "Waiting for OpenShift build to finish"
+      - |
+        # Wait until the build completes
+        oc wait --for=condition=complete build/vllm-main-buildconfig-2-4 --timeout=120m

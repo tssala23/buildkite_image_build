@@ -2,5 +2,5 @@ steps:
   # Step 1: Trigger the OpenShift build
   - label: "Trigger OpenShift Build"
     commands:
-      - echo "PATH is: $PATH"
+      # - echo "PATH is: $PATH"
       - sleep 600

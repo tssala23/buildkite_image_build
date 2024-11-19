@@ -1,0 +1,13 @@
+steps:
+  - label: "Run on default Agent"
+    command: "echo Running on default"
+
+  - label: "Run on queue1 Agent"
+    command: "echo Running on queue1"
+    agents:
+      queue: "queue1"
+
+  - label: "Run on queue2 Agent"
+    command: "echo Running on queue2"
+    agents:
+      queue: "queue2"

@@ -1,13 +1,15 @@
 steps:
   - label: "Run on default Agent"
-    command: "echo Running on default queue"
+    commands: 
+      - echo Running on default queue
+      - sleep 1
 
-  - label: "Run on queue1 Agent"
-    command: "echo Running on queue1"
-    agents:
-      queue: "queue1"
-
-  - label: "Run on queue2 Agent"
-    command: "echo Running on queue2"
-    agents:
-      queue: "queue2"
+#  - label: "Run on queue1 Agent"
+#    command: "echo Running on queue1"
+#    agents:
+#      queue: "queue1"
+#
+#  - label: "Run on queue2 Agent"
+#    command: "echo Running on queue2"
+#    agents:
+#      queue: "queue2"

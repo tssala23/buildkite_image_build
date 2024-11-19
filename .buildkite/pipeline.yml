@@ -2,7 +2,7 @@ steps:
   - label: "Run on default Agent"
     commands: 
       - echo Running on default queue
-      - sleep 1
+      - sleep 30
 
   - label: "Run on queue1 Agent"
     command: "echo Running on queue1"

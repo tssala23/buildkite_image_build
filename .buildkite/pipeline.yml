@@ -13,3 +13,10 @@ steps:
     command: "echo Running on queue2"
     agents:
       queue: "queue2"
+
+  - label: "Run on queue2 Agent"
+    commands: 
+      - echo Running on ocimage
+      - oc whoami
+    agents:
+      queue: "oc-image"

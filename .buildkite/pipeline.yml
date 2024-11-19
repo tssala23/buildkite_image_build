@@ -1,6 +1,6 @@
 steps:
   - label: "Run on default Agent"
-    command: "echo Running on default"
+    command: "echo Running on default queue"
 
   - label: "Run on queue1 Agent"
     command: "echo Running on queue1"

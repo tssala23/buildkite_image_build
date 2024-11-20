@@ -3,7 +3,7 @@ steps:
     key: delay
     commands: 
       - echo Running on default queue
-      - sleep 16
+      - sleep 10
 
   - label: "Run on queue1 Agent"
     depends_on: delay

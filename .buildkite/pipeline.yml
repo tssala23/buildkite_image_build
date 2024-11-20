@@ -20,8 +20,8 @@ steps:
     commands: 
       - echo Running on ocimage
       - oc whoami
-      - oc patch configmap agent-stack-k8s-config-test \
+      - "oc patch configmap agent-stack-k8s-config-test \
         --type=json \
-        -p='[{"op": "replace", "path": "/data/config.yaml", "value": "agent-token-secret: agent-stack-k8s-secrets\nnamespace: buildkite\ncluster-uuid: 2ec33b8f-cb1b-4bb0-bdf8-d0f44ec6ea2b\ndebug: false\ndefault-checkout-params:\n envFrom:\n - configMapRef:\n name: agent-stack-k8s-env-vars-config\ndefault-command-params:\n envFrom:\n - configMapRef:\n name: agent-stack-k8s-env-vars-config\nimage: quay.io/tsalawu0/buildkite-runner:latest\nimage-pull-backoff-grace-period: 60s\njob-ttl: 5m\nmax-in-flight: 100\norg: test-org2-5\npod-spec-patch:\n containers:\n - name: agent\n - name: checkout\n - name: container-0\n initContainers:\n - name: copy-agent\npoll-interval: 5s\nprohibit-kubernetes-plugin: true\ntags:\n- queue=oc-image\n- priority=high"}]'
+        -p='[{"op": "replace", "path": "/data/config.yaml", "value": "agent-token-secret: agent-stack-k8s-secrets\nnamespace: buildkite\ncluster-uuid: 2ec33b8f-cb1b-4bb0-bdf8-d0f44ec6ea2b\ndebug: false\ndefault-checkout-params:\n envFrom:\n - configMapRef:\n name: agent-stack-k8s-env-vars-config\ndefault-command-params:\n envFrom:\n - configMapRef:\n name: agent-stack-k8s-env-vars-config\nimage: quay.io/tsalawu0/buildkite-runner:latest\nimage-pull-backoff-grace-period: 60s\njob-ttl: 5m\nmax-in-flight: 100\norg: test-org2-5\npod-spec-patch:\n containers:\n - name: agent\n - name: checkout\n - name: container-0\n initContainers:\n - name: copy-agent\npoll-interval: 5s\nprohibit-kubernetes-plugin: true\ntags:\n- queue=oc-image\n- priority=high"}]'"
     agents:
       queue: "oc-image"

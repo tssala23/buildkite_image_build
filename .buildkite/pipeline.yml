@@ -1,9 +1,9 @@
 steps:
-  - label: "Run on default Agent "
+  - label: "Run on default Agent"
     key: delay
     commands: 
       - echo Running on default queue
-      - sleep 30
+      - sleep 15
 
   - label: "Run on queue1 Agent"
     depends_on: delay

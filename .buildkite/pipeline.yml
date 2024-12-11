@@ -4,4 +4,4 @@ steps:
     commands:
       - sleep 600
     agents:
-      queue: "queue1"
+      queue: "vllm-image"

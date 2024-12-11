@@ -2,6 +2,12 @@ steps:
   - label: "Async Engine, Inputs, Utils, Worker Test"
     agents:
         queue: vllm-image
+    soft_fail: false
+    retry:
+      automatic:
+        - exit_status: -1  # Agent was lost
+          limit: 1
+        - exit_status: -10  # Agent was lost
+          limit: 1
     commands:
       - echo "Triggering OpenShift build"
-

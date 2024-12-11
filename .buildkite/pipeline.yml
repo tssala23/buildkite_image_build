@@ -1,5 +1,6 @@
 - steps:
     - label: "Async Engine, Inputs, Utils, Worker Test"
+      type: "command"
       agents:
         queue: vllm-image
       soft_fail: false

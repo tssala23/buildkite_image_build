@@ -1,0 +1,7 @@
+steps:
+  - label: "Run on queue1 Agent"
+    depends_on: delay
+    commands:
+      - sleep 600
+    agents:
+      queue: "queue1"

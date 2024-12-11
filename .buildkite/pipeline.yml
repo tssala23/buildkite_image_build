@@ -1,6 +1,5 @@
 steps:
-  - label: "Run on queue1 Agent"
-    depends_on: delay
+  - label: "Run on vllm Agent"
     commands:
       - sleep 600
     agents:

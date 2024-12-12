@@ -9,6 +9,9 @@ steps:
           limit: 1
         - exit_status: -10  # Agent was lost
           limit: 1
+    env:
+      VLLM_USAGE_SOURCE: "ci-test"
+      HF_HOME: "/root/.cache/huggingface"
     commands:
       - (command nvidia-smi || true)
       - export VLLM_LOGGING_LEVEL=DEBUG

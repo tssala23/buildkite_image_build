@@ -33,3 +33,7 @@ steps:
                   value: ci-test
             nodeSelector:
               kubernetes.io/hostname: "wrk-4"
+            volumes:
+            - name: devshm
+              emptyDir:
+                medium: Memory

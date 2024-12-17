@@ -1,0 +1,19 @@
+steps:
+  - label: "Run Weight Loading Multiple GPU Test"
+    agents:
+        queue: moc-a100
+    soft_fail: false
+    retry:
+      automatic:
+        - exit_status: -1  # Agent was lost
+          limit: 1
+        - exit_status: -10  # Agent was lost
+          limit: 1
+    env:
+      VLLM_USAGE_SOURCE: "ci-test"
+    commands:
+      - (command nvidia-smi || true)
+      - export VLLM_LOGGING_LEVEL=DEBUG
+      - export VLLM_ALLOW_DEPRECATED_BEAM_SEARCH=1
+      - cd /vllm-workspace/tests
+      - bash weight_loading/run_model_weight_loading_test.sh -c weight_loading/models.txt

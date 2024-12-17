@@ -1,7 +1,7 @@
 steps:
   - label: "Run Weight Loading Multiple GPU Test"
     agents:
-        queue: moc-a100
+        queue: vllm-image
     soft_fail: false
     retry:
       automatic:

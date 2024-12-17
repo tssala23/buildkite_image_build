@@ -31,13 +31,11 @@ steps:
                 env:
                 - name: VLLM_USAGE_SOURCE
                   value: ci-test
+                - name: HF_HOME
+                  value: /root/.cache/huggingface
             nodeSelector:
               kubernetes.io/hostname: "wrk-4"
             volumes:
             - name: devshm
               emptyDir:
                 medium: Memory
-            - name: hf-cache
-              hostPath:
-                path: /root/.cache/huggionface
-                type: Directory

@@ -1,4 +1,4 @@
-steps:
+- steps:
   - label: "Run Weight Loading Multiple GPU Test"
     agents:
         queue: vllm-image

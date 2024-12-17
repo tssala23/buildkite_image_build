@@ -37,3 +37,7 @@ steps:
             - name: devshm
               emptyDir:
                 medium: Memory
+            - name: hf-cache
+              hostPath:
+                path: /root/.cache/huggionface
+                type: Directory

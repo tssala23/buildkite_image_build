@@ -17,3 +17,19 @@ steps:
       - export VLLM_ALLOW_DEPRECATED_BEAM_SEARCH=1
       - cd /vllm-workspace/tests
       - bash weight_loading/run_model_weight_loading_test.sh -c weight_loading/models.txt
+    plugins:
+      - kubernetes:
+          podSpec:
+            priorityClassName: ci
+            containers:
+            - image: public.ecr.aws/q9t5s3a7/vllm-ci-postmerge-repo:c92acb9693c0504d7dabed2a0251b9f5d4ddaebb
+              resources:
+                requests:
+                  nvidia.com/gpu: 2
+                limits:
+                  nvidia.com/gpu: 2
+                env:
+                - name: VLLM_USAGE_SOURCE
+                  value: ci-test
+            nodeSelector:
+              kubernetes.io/hostname: "wrk-4"

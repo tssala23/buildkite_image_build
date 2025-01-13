@@ -2,6 +2,7 @@ steps:
   - label: "Weight Loading Multiple GPU Test - Large Models"
     agents:
         queue: moc-a100
+    num_gpus: 2
     soft_fail: false
     retry:
       automatic:

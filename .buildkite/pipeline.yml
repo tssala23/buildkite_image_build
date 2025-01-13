@@ -26,5 +26,13 @@ steps:
                   nvidia.com/gpu: 4
                 limits:
                   nvidia.com/gpu: 4
+            volumes:
+            - name: dshm
+              emptyDir:
+                medium: Memory
+                sizeLimit: 8Gi
+            volumeMounts:
+            - mountPath: /dev/shm
+              name: dshm
             nodeSelector:
               kubernetes.io/hostname: "wrk-4"

@@ -30,7 +30,7 @@ steps:
             - name: dshm
               emptyDir:
                 medium: Memory
-                sizeLimit: 8Gi
+                sizeLimit: 64Gi
             volumeMounts:
             - mountPath: /dev/shm
               name: dshm

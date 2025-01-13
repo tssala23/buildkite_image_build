@@ -2,7 +2,6 @@ steps:
   - label: "Weight Loading Multiple GPU Test - Large Models"
     agents:
         queue: moc-a100
-    num_gpus: 2
     soft_fail: false
     retry:
       automatic:
@@ -11,8 +10,10 @@ steps:
         - exit_status: -10  # Agent was lost
           limit: 1
     commands:
-      - cd /vllm-workspace/tests
-      - bash weight_loading/run_model_weight_loading_test.sh -c weight_loading/models-large.txt 
+      - pytest -v -s distributed/test_custom_all_reduce.py
+      - torchrun --nproc_per_node=2 distributed/test_ca_buffer_sharing.py
+      - TARGET_TEST_SUITE=A100 pytest basic_correctness/ -v -s -m 'distributed(num_gpus=2)'
+      - pytest -v -s -x lora/test_mixtral.py
     plugins:
       - kubernetes:
           podSpec:
@@ -21,8 +22,8 @@ steps:
             - image: public.ecr.aws/q9t5s3a7/vllm-ci-postmerge-repo:c92acb9693c0504d7dabed2a0251b9f5d4ddaebb
               resources:
                 requests:
-                  nvidia.com/gpu: 3
+                  nvidia.com/gpu: 4
                 limits:
-                  nvidia.com/gpu: 3
+                  nvidia.com/gpu: 4
             nodeSelector:
               kubernetes.io/hostname: "wrk-4"

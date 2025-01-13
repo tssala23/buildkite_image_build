@@ -20,7 +20,7 @@ steps:
             - image: public.ecr.aws/q9t5s3a7/vllm-ci-postmerge-repo:c92acb9693c0504d7dabed2a0251b9f5d4ddaebb
               resources:
                 requests:
-                  nvidia.com/gpu: 2
+                  nvidia.com/gpu: 3
                 limits:
                   nvidia.com/gpu: 3
             nodeSelector:

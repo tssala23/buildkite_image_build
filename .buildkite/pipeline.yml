@@ -27,10 +27,15 @@ steps:
               volumeMounts:
               - name: shm-volume
                 mountPath: /dev/shm
+              - name: tmp-volume 
+                mountPath: /tmp
             volumes:
             - name: shm-volume
               persistentVolumeClaim:
                 claimName: shm-pvc
+            - name: tmp-volume
+              persistentVolumeClaim:
+                claimName: tmp-volume
             nodeSelector:
               kubernetes.io/hostname: "wrk-4"
             tolerations:

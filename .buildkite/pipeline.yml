@@ -11,10 +11,8 @@ steps:
           limit: 1
     commands:
       - cd /vllm-workspace/tests
-      #- pytest -v -s distributed/test_custom_all_reduce.py
-      #- torchrun --nproc_per_node=2 distributed/test_ca_buffer_sharing.py
-      #- TARGET_TEST_SUITE=A100 pytest basic_correctness/ -v -s -m 'distributed(num_gpus=2)'
-      - pytest -v -s -x lora/test_mixtral.py
+      - export VLLM_WORKER_MULTIPROC_METHOD=spawn
+      - bash ./run-tests.sh -c configs/models-large.txt -t 4
     plugins:
       - kubernetes:
           podSpec:

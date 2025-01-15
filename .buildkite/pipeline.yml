@@ -10,10 +10,9 @@ steps:
         - exit_status: -10  # Agent was lost
           limit: 1
     commands:
-      #- cd /vllm-workspace/tests
-      #- export VLLM_WORKER_MULTIPROC_METHOD=spawn
-      #- bash ./run-tests.sh -c configs/models-large.txt -t 4
-      - sleep 6000
+      - cd /vllm-workspace/.buildkite/lm-eval-harness
+      - export VLLM_WORKER_MULTIPROC_METHOD=spawn
+      - bash ./run-tests.sh -c configs/models-large.txt -t 4
     plugins:
       - kubernetes:
           podSpec:
